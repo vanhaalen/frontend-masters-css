@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="app">
+      <button id="play-button">Pause</button>
       <small>Frontend Masters</small>
       <h1>CSS Animation Workshop</h1>
       <ul>
@@ -30,4 +31,23 @@
       <div class="ball"></div>
     </div>
   </body>
+  <script>
+    playButton = document.getElementById("play-button");
+    playButton.addEventListener("click", () => {
+      console.log("clicked");
+      if (playButton.innerText === "Pause") {
+        document.documentElement.style.setProperty(
+          "--animation-play-state",
+          "paused"
+        );
+        playButton.innerText = "Play";
+      } else {
+        document.documentElement.style.setProperty(
+          "--animation-play-state",
+          "running"
+        );
+        playButton.innerText = "Pause";
+      }
+    });
+  </script>
 </html>

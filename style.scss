@@ -1,7 +1,17 @@
-@import './styles/base.scss';
+@import "./styles/base.scss";
+
+:root {
+  --animation-play-state: running;
+}
+
+*,
+*:before,
+*:after {
+  animation-play-state: var(--animation-play-state) !important;
+}
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 5vmin;
   background-color: #f4f4f4;
 }
@@ -28,4 +38,9 @@ ul {
   width: 5vmin;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+}
+
+#play-button {
+  display: block;
+  min-width: 5rem;
 }
