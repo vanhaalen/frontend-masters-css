@@ -39,19 +39,33 @@ ul {
 .ball {
   height: 5vmin;
   width: 5vmin;
+  left: 50vw;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-  animation: slide-right var(--duration) var(--easing) infinite;
+  background: red;
+  transition-property: background-color, transform;
+  transition-timing-function: linear, ease-in-out;
+  transition-duration: 0.25s;
+  transition-delay: 0.5s;
+
+  transition: all 2s 0.5 ease-in-out;
+
+  &:hover {
+    background: blue;
+    transform: scale(2);
+    transition-delay: 0s;
+    transition-duration: var(--duration), 0.5s;
+  }
 }
 
-@keyframes slide-right {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(50vw);
-  }
-}
+// @keyframes slide-right {
+//   from {
+//     transform: translateX(0);
+//   }
+//   to {
+//     transform: translateX(50vw);
+//   }
+// }
 
 #play-button {
   display: block;
