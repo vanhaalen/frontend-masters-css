@@ -42,30 +42,47 @@ ul {
   left: 50vw;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-  background: red;
-  transition-property: background-color, transform;
-  transition-timing-function: linear, ease-in-out;
-  transition-duration: 0.25s;
-  transition-delay: 0.5s;
-
-  transition: all 2s 0.5 ease-in-out;
+  animation-name: move-like-a-square, red-to-green;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
 
   &:hover {
-    background: blue;
-    transform: scale(2);
-    transition-delay: 0s;
-    transition-duration: var(--duration), 0.5s;
   }
 }
 
-// @keyframes slide-right {
-//   from {
-//     transform: translateX(0);
-//   }
-//   to {
-//     transform: translateX(50vw);
-//   }
-// }
+@keyframes move-like-a-square {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  25% {
+    transform: translateX(20vw);
+    animation-timing-function: linear;
+  }
+
+  50% {
+    transform: translateY(20vw) translateX(20vw);
+    animation-timing-function: linear;
+  }
+
+  75% {
+    transform: translateY(20vw) translateX(0);
+  }
+}
+
+@keyframes red-to-green {
+  from {
+    background: red;
+  }
+
+  to {
+    background: green;
+  }
+}
 
 #play-button {
   display: block;
