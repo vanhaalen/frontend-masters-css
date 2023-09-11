@@ -10,16 +10,79 @@
   <body>
     <form class="ui-form" data-state="subscribe">
       <input class="ui-input" type="email" placeholder="your@email.com" />
-      <button class="ui-button" type="button" onclick="setState('subscribing')">
-        <span>Subscribe</span>
-        <span>Subscribing</span>
-        <span>Success!</span>
-        <span>Error</span>
+      <button
+        class="ui-button"
+        type="button"
+        onclick="setState(
+        'subscribing'
+      )"
+      >
+        <span data-show="subscribe">Subscribe</span>
+        <span data-show="subscribing">Subscribing</span>
+        <span data-show="success">Success!</span>
+        <span data-show="error">Error</span>
       </button>
     </form>
   </body>
   <script>
-    const form = document.querySelector('.ui-form');
+    const form = document.querySelector(".ui-form");
+
+    // const machine = {
+    //   initial: "subscribe",
+    //   states: {
+    //     subscribe: {
+    //       on: {
+    //         NEXT: "subscribing"
+    //       }
+    //     },
+    //     subscribing: {
+    //       on: {
+    //         NEXT: Math.random() > 0.5 ? "success" : "error"
+    //       }
+    //     },
+    //     success: {
+    //       on: {
+    //         NEXT: "subscribe"
+    //       }
+    //     },
+    //     error: {
+    //       on: {
+    //         NEXT: "subscribe"
+    //       }
+    //     }
+    //   }
+    // };
+
+    function setState(state) {
+      form.dataset.state = state;
+
+      const activeEls = form.querySelectorAll("[data-active]");
+      const shownEls = form.querySelectorAll(`[data-show="${state}"]`);
+
+      activeEls.forEach(el => {
+        delete el.dataset.active;
+      });
+      shownEls.forEach(el => {
+        el.dataset.active = true;
+      });
+
+      if (state === "subscribing") {
+        setTimeout(() => {
+          if (Math.random() > 0.5) {
+            setState("error");
+          } else {
+            setState("success");
+          }
+        }, 1000);
+      }
+
+      // const currentState = form.dataset.state ?? machine.initial;
+      // const nextState = machine.states[currentState].on.NEXT ?? currentState;
+      // form.setAttribute("data-state", nextState);
+      // console.log(form.dataset.state);
+    }
+
+    setState("subscribe");
 
     // ...
   </script>

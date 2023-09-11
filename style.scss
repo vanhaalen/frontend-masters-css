@@ -19,12 +19,28 @@ body {
   background-color: #f4f4f4;
 }
 
+#app {
+  --opacity: 1;
+  --background: #fff;
+
+  background: var(--background);
+
+  &[data-state="loading"] {
+    --opacity: 0.3;
+  }
+
+  &[data-state="success"] {
+    --background: pink;
+  }
+}
+
 a {
   color: blue;
 }
 
 h1 {
   margin: 0;
+  opacity: var(--opacity);
 }
 
 small {
@@ -53,6 +69,28 @@ ul {
   --stagger: 0.15s;
   --interval: calc(var(--duration) - var(--stagger));
   animation: move-right var(--duration) calc(var(--interval) * var(--i)) both;
+}
+
+.button {
+  appearance: none;
+  background: blue;
+  color: #fff;
+  font-weight: bold;
+  padding: 2rem;
+  border: none;
+  transition: all 0.3s;
+
+  opacity: var(--opacity);
+
+  // &:hover {
+  //   opacity: 0.5;
+  // }
+
+  // &:active {
+  //   transition-duration: 0.15s;
+  //   transform: translateY(20%);
+  //   opacity: 1;
+  // }
 }
 
 @keyframes move-right {
