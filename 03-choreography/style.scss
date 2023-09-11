@@ -1,4 +1,4 @@
-@import '../styles/base.scss';
+@import "../styles/base.scss";
 
 :root {
   --color-gray: #8c97b7;
@@ -25,7 +25,7 @@ body {
   grid-template-columns: 1fr auto;
   grid-template-rows: 1fr;
   grid-column-gap: 1rem;
-  grid-template-areas: 'input button';
+  grid-template-areas: "input button";
   transition: all var(--transition-duration) var(--transition-easing);
   will-change: transform;
 
@@ -35,17 +35,20 @@ body {
   }
 
   animation: slide-up var(--animation-duration) var(--transition-easing);
+  --input-duration: calc(var(--animation-duration) / 2);
+  --input-delay: calc(var(--animation-duration) / 2);
+  --button-delay: calc(var(--input-delay) + var(--input-duration) / 2);
 
   > .ui-input,
   > .ui-button {
-    // Add animations here
+    animation: fade-in var(--input-duration) var(--transition-easing) backwards;
   }
 
   > .ui-input {
-    // ...
+    animation-delay: var(--input-delay);
   }
   > .ui-button {
-    // ...
+    animation-delay: var(--button-delay);
   }
 }
 
@@ -87,6 +90,15 @@ body {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

@@ -42,14 +42,26 @@ ul {
   left: 50vw;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-  animation-name: move-like-a-square, red-to-green;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 0s;
-  animation-iteration-count: infinite;
-  animation-direction: reverse;
+  // animation-name: move-like-a-square, red-to-green;
+  // animation-duration: 1s;
+  // animation-fill-mode: both;
+  // animation-delay: 0s;
+  // animation-iteration-count: infinite;
+  // animation-direction: reverse;
 
-  &:hover {
+  --duration: 0.3s;
+  --stagger: 0.15s;
+  --interval: calc(var(--duration) - var(--stagger));
+  animation: move-right var(--duration) calc(var(--interval) * var(--i)) both;
+}
+
+@keyframes move-right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(10vw);
   }
 }
 
