@@ -23,13 +23,52 @@
     </div>
   </body>
   <script>
-    const figureEl = document.querySelector('.ui-figure');
-    const captionEl = document.querySelector('.ui-caption');
-    const appEl = document.querySelector('#app');
+    const figureEl = document.querySelector(".ui-figure");
+    const captionEl = document.querySelector(".ui-caption");
+    const appEl = document.querySelector("#app");
 
-    appEl.addEventListener('click', () => {
-      app.dataset.state =
-        app.dataset.state === 'collapsed' ? 'expanded' : 'collapsed';
+    function flip(fn, firstEls, lastEls = firstEls) {
+      const firstRects = firstEls.map(el => el.getBoundingClientRect());
+
+      fn();
+
+      requestAnimationFrame(() => {
+        const lastRects = lastEls.map(el => el.getBoundingClientRect());
+
+        lastRects.forEach((lastRect, i) => {
+          const firstRect = firstRects[i];
+          const lastEl = lastEls[i];
+
+          if (!firstRect) {
+            return;
+          }
+
+          const deltaX = firstRect.left - lastRect.left;
+          const deltaY = firstRect.top - lastRect.top;
+          const deltaW = firstRect.width / lastRect.width;
+          const deltaH = firstRect.height / lastRect.height;
+
+          lastEl.style.setProperty("--dx", `${deltaX}px`);
+          lastEl.style.setProperty("--dy", `${deltaY}px`);
+          lastEl.style.setProperty("--dw", deltaW);
+          lastEl.style.setProperty("--dh", deltaH);
+
+          lastEl.dataset.flip = "invert";
+        });
+
+        requestAnimationFrame(() => {
+          lastEls.forEach(lastEl => {
+            lastEl.dataset.flip = "play";
+          });
+        });
+      });
+    }
+
+    appEl.addEventListener("click", () => {
+      flip(() => {
+        appEl.dataset.state =
+          appEl.dataset.state === "collapsed" ? "expanded" : "collapsed";
+      }, [figureEl, captionEl]);
     });
     // ...
   </script>
